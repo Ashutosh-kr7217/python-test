@@ -1,0 +1,23 @@
+name: All Trigger Types Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: '0 3 * * *' # Runs every day at 3:00 AM UTC
+  workflow_dispatch: # Manual trigger from GitHub UI
+
+jobs:
+  demo-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Show Trigger Type
+        run: |
+          echo "This workflow was triggered by: ${{ github.event_name }}"
