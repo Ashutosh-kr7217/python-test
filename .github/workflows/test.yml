@@ -1,12 +1,7 @@
-name: "My Custom Greeting Action"
-description: "Greets the user and prints the current date"
-inputs:
-  username:
-    description: "Name to greet"
-    required: true
-runs:
-  using: "composite"
-  steps:
-    - run: echo "Hello, ${{ inputs.username }} 👋"
-    - run: echo "Today is $(date)"
-      shell: bash
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./my-custom-action
+        with:
+          username: Ashutosh
