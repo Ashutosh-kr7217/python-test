@@ -1,13 +1,18 @@
+name: Reusable Deploy Workflow
+
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'infrastructure/**'
-      - 'terraform/**'
+  workflow_call: 
+    inputs:
+      environment:
+        required: true
+        type: string
+    secrets:
+      DEPLOY_TOKEN:
+        required: true
+
 jobs:
   deploy:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Deploying on push to main"
+      - name: Deploying to ${{ inputs.environment }}
+        run: echo "Deploying with token ${{ secrets.DEPLOY_TOKEN }}"
