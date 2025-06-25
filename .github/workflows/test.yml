@@ -1,18 +1,11 @@
-name: Reusable Deploy Workflow
+name: Call Reusable Deploy
 
-on:
-  workflow_call: 
-    inputs:
-      environment:
-        required: true
-        type: string
-    secrets:
-      DEPLOY_TOKEN:
-        required: true
+on: [push]
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploying to ${{ inputs.environment }}
-        run: echo "Deploying with token ${{ secrets.DEPLOY_TOKEN }}"
+  call-deploy:
+    uses: ./.github/workflows/reusable-deploy.yml # Local call
+    with:
+      environment: production
+    secrets:
+      DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
