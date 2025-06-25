@@ -1,4 +1,4 @@
-name: All Trigger Types Workflow
+name: Demo Workflow
 
 on:
   push:
