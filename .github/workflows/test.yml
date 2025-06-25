@@ -1,17 +1,12 @@
-name: Demo Workflow
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  demo-job:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Show Trigger Type
-        run: |
-          echo "This workflow was triggered by: ${{ github.event_name }}"
+name: "My Custom Greeting Action"
+description: "Greets the user and prints the current date"
+inputs:
+  username:
+    description: "Name to greet"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: echo "Hello, ${{ inputs.username }} 👋"
+    - run: echo "Today is $(date)"
+      shell: bash
